@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 
 const TryOnPage = () => {
   const [showExamples, setShowExamples] = useState(false);
   const [image, setImage] = useState(null);
+
+  const navigate = useNavigate();
+
+  const GoUserImage = () => {
+    navigate('/user-image');
+  };
 
   // Detect scroll to trigger the change
   useEffect(() => {
@@ -94,6 +102,11 @@ const TryOnPage = () => {
     <div className="mt-8">
         <p className='text-xl'> Step 1/3</p>
         <div className="w-52a bg-gray-300 rounded-full h-2">
+        {image && (
+            <button className="bg-blue-500 px-4 py-2 rounded-lg w-36 h-12 mt-4 text-white" onClick={GoUserImage}>
+              Next
+            </button>
+          )}
         </div>
 </div>
 </div>
