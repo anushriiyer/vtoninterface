@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+p{
+  font-family: 'Bebas Neue';
+  font-size: 175px;
+}
+
+ul{
+  position: absolute;
+  right: 5%;
+  top:7%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #EFEDE4;
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #F3F3E8;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #758657;
+}
+
+.logo {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+}
+
+body {
+  background-color:#222222;
+  overflow: hidden;
+}
+
+
+
+h1 {
+  font-size: 11rem;
+  line-height: 1.1;
+  font-family: 'Bebas Neue', sans-serif;
+  text-align: left;
+  line-height: 0.8;
+}
+
+.text-container {
+  display: flex;
+  align-items: center;  /* Aligns content to the top-left */
+  margin-top: 15vh;
+  height: 80vh;
+  width:50%;  
+  /*background-color: yellowgreen;  */
+}
+
+.main-text {
+  transform: scaleY(1.2);
+  padding-top: 60px;
+  padding-left: 80px;
+}
+
+
+.title{
+  margin-top: 2%;
+  font-size: 2rem;
+  text-align: left;
+  line-height: 1;
+  transform: scaleX(1.2);
+  margin-left: 3%;
+}
+
+.bottom-text {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.custom-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;  /* Set width */
+  height: 125px;  /* Equal height for a perfect circle */
+  border-radius: 50%;  /* Makes the button circular */
+  background-color: #758657;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+button:hover {
+  border-color: gray;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.image-container{
+  display: flex;
+  /*background-color: #747bff;*/
+  width: 50%;
+  height: 90vh;
+  margin-top: 15vh;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+}
+
+.site-container{
+  /*background-color: aqua;*/
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+
+}
+
+.mirrorimage{
+  width: 950px;  /* Adjust as needed */
+  height: 950px; /* Ensure it's equal to width */
+  border-radius: 50%; /* Makes it a circle */
+  overflow: hidden; /* Prevents any overflow */
+  object-fit: cover; /* Ensures the image fills the circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: -15%;
+  margin-bottom: -15%;
+}
+
+.upload-box{
+  background-color: #758657;
+
+}
