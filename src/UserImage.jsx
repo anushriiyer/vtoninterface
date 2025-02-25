@@ -1,14 +1,38 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Add this if using React Router
+import { Link } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
+
+async function saveFileToLocalStorage(key, file) {
+  const base64 = await fileToBase64(file);
+  localStorage.setItem(key, JSON.stringify({ base64, type: file.type }));
+}
+
 
 const UserImage = () => {
     const [image, setImage] = useState(null);
+
+    const navigate = useNavigate();
+
+    const GoResultPage = () => {
+      navigate('/result');
+    };
+  
 
     const handleImageUpload = (event) => {
       const file = event.target.files[0];
       if (file) {
         const imageUrl = URL.createObjectURL(file);
         setImage(imageUrl);
+        saveFileToLocalStorage("userImageFile", file);
       }
     };
 
@@ -47,7 +71,7 @@ const UserImage = () => {
 
           {/* Conditional "Next" Button */}
           {image && (
-            <button className="bg-blue-500 px-4 py-2 rounded-lg w-36 h-12 mt-4 text-white">
+            <button className="bg-blue-500 px-4 py-2 rounded-lg w-36 h-12 mt-4 text-white" onClick={GoResultPage}>
               Next
             </button>
           )}

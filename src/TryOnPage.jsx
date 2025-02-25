@@ -37,9 +37,25 @@ const TryOnPage = () => {
     const file = event.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
+      saveFileToLocalStorage("garmentImageFile", file);
       setImage(imageUrl);
+
     }
   };
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+  
+  async function saveFileToLocalStorage(key, file) {
+    const base64 = await fileToBase64(file);
+    localStorage.setItem(key, JSON.stringify({ base64, type: file.type }));
+  }
 
   return (
     <div className='site-container'>
