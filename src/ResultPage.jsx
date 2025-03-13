@@ -31,9 +31,9 @@ const ResultPage = () => {
 
   useEffect(() => {
     const runTryOn = async (retryCount = 10, delay = 5000) => {
-      const faceImage = getSavedFile("userImageFile"); // Model image as face input
-      const garmentImage = getSavedFile("garmentImageFile"); // Top garment
-      const poseImage = getSavedFile("poseImageFile"); // Optional pose image
+      const faceImage = getSavedFile("userImageFile"); 
+      const garmentImage = getSavedFile("garmentImageFile"); 
+      const poseImage = getSavedFile("poseImageFile"); 
 
       if (!faceImage || !garmentImage) {
         console.error("Face image or garment image is missing. Aborting API call.");
@@ -43,7 +43,8 @@ const ResultPage = () => {
 
       let app;
       try {
-        app = await Client.connect("feishen29/IMAGDressing-v1");
+        app = await Client.connect("anushriiyer/IMAGDressing-v1");
+      
         console.log("API Connected:", app);
       } catch (error) {
         console.error("Failed to connect to API:", error);
@@ -68,7 +69,7 @@ const ResultPage = () => {
             0.2,
             true,
             true,
-            30,
+            20,
             20240508
           ]);
 
@@ -85,7 +86,7 @@ const ResultPage = () => {
           }
         } catch (error) {
           console.error("❌ API Request Error:", error);
-          setError(`API Error: ${error.message || "Unknown error"}`);
+          //setError(`API Error: ${error.message || "Unknown error"}`);
           if (attempt === retryCount) {
             setLoading(false);
           }

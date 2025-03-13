@@ -8,7 +8,8 @@ export default {
     extend: {
        colors:{
         'brand-green':'#758657',
-        'brand-beige':'#F3F3E8'
+        'brand-beige':'#F3F3E8',
+        'brand-green-dark':'#465232'
        }
     },
   },
