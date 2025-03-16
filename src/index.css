@@ -7,6 +7,7 @@
 
 html{
   display: flex;
+  margin: 0;
 }
 
 p{
@@ -19,6 +20,12 @@ ul{
   right: 5%;
   top:7%;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.carousell-slide{
+  max-height: 550px;
+  object-fit: contain;
+  border-radius: 5%;
 }
 
 
@@ -57,6 +64,11 @@ body {
 .logo-position {
   margin-left: 0;
   padding-top: 1%;
+}
+
+#root, #app {
+  width: 100vw;
+  height: 100vh;
 }
 
 
@@ -144,8 +156,6 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-
-
 }
 
 .site-container{

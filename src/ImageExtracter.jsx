@@ -19,21 +19,26 @@ const ImageExtractor = ({ url, setImage }) => {
           body: JSON.stringify({ url }),
         });
 
-        const data = await response.json();
-        if (data.image) {
-          setImage(data.image); 
-        } else {
-          setError("No image found for this URL.");
+        if (!response.ok) {
+          throw new Error("Failed to fetch image");
         }
+
+        // Convert response to Blob
+        const blob = await response.blob();
+        const fileURL = URL.createObjectURL(blob);
+
+        setImage(fileURL); // Set image as Blob URL
       } catch (err) {
         setError("Failed to fetch image.");
       }
     };
 
     fetchImage();
-  }, [url, setImage]); 
+  }, [url, setImage]); // Depend on url and setImage to re-run when they change
 
-  return error ? <p style={{ color: "red", fontSize: "18px", fontFamily: "Arial"}}>{error}</p> : null;;
+  return error ? (
+    <p style={{ color: "red", fontSize: "18px", fontFamily: "Arial" }}>{error}</p>
+  ) : null;
 };
 
 export default ImageExtractor;

@@ -10,6 +10,9 @@ export default {
         'brand-green':'#758657',
         'brand-beige':'#F3F3E8',
         'brand-green-dark':'#465232'
+       },
+       fontFamily:{
+        'Arial':'Arial'
        }
     },
   },

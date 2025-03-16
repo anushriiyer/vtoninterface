@@ -31,22 +31,6 @@ const TryOnPage = () => {
   }, []);
 
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      saveFileToLocalStorage("garmentImageFile", file);
-      setImage(imageUrl); // Set image immediately for uploaded files
-    }
-  };
-
-  const handleUrlUpload = () => {
-    if (extractedImage) {
-      setImage(extractedImage);
-      saveFileToLocalStorage("garmentImageFile", file); // Move extracted image to upload box
-    }
-  };
-
-  function fileToBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -54,11 +38,45 @@ const TryOnPage = () => {
       reader.onerror = (error) => reject(error);
     });
   }
+  
+  const handleUrlUpload = () => {
+    if (extractedImage) {
+        console.log("Setting extractedImage:", extractedImage);
+        setImage(extractedImage);
 
-  async function saveFileToLocalStorage(key, file) {
-    const base64 = await fileToBase64(file);
-    localStorage.setItem(key, JSON.stringify({ base64, type: file.type }));
-  }
+        // Convert extractedImage to a file for saving
+        fetch(extractedImage)
+            .then(res => res.blob())
+            .then(blob => {
+                const file = new File([blob], "extracted_image.jpg", { type: "image/jpeg" });
+                saveFileToLocalStorage("garmentImageFile", file);
+                console.log("File saved to localStorage:", file);
+            })
+            .catch(error => console.error("Error converting extracted image:", error));
+    }
+};
+
+// Debug if `image` state updates
+useEffect(() => {
+    console.log("Updated image state:", image);
+}, [image]);
+
+  
+function saveFileToLocalStorage(key, file) {
+  return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+          const base64String = reader.result;
+          const fileData = { base64: base64String };  // Store in the same format as `userImageFile`
+          
+          localStorage.setItem(key, JSON.stringify(fileData)); // Store as JSON object
+          resolve(fileData);
+      };
+      reader.onerror = (error) => reject(error);
+  });
+}
+
 
   return (
     <div className='site-container'>
@@ -122,11 +140,12 @@ const TryOnPage = () => {
         <button className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl" onClick={handleUrlUpload}>Upload</button>
         <button className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl" onClick={() => setImage(null)}>Remove</button>
       </div>
+      </div>
 
       {/*Next Button appears on image */}
       {image && (
             <button onClick={GoUserImage}>
-              <svg  viewBox="-3 0 32 32" version="1.1" className='w-44 mt-10' stroke='#F3F3E8' strokeWidth="0.5">
+              <svg  viewBox="-3 0 32 32" version="1.1" className='w-44 mb-0 mr-0' stroke='#F3F3E8' strokeWidth="0.5">
                   <g id="icomoon-ignore">
                   </g>
                   <path d="M13.11 29.113c7.243 0 13.113-5.871 13.113-13.113s-5.87-13.113-13.113-13.113c-7.242 0-13.113 5.871-13.113 13.113s5.871 13.113 13.113 13.113zM13.11 3.936c6.652 0 12.064 5.412 12.064 12.064s-5.412 12.064-12.064 12.064c-6.653 0-12.064-5.412-12.064-12.064s5.411-12.064 12.064-12.064z" fill="#000000"/>
@@ -134,9 +153,6 @@ const TryOnPage = () => {
                 </svg>
             </button>
           )}
-
-
-      </div>
 
 
 

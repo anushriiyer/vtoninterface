@@ -9,6 +9,7 @@ import TryOnPage from './TryOnPage';
 import UserImage from './UserImage';
 import ResultPage from './ResultPage'
 import './index.css'
+import 'flowbite'
 
 function App() {
   return (
