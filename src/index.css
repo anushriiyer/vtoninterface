@@ -114,8 +114,8 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;  /* Set width */
-  height: 180px;  /* Equal height for a perfect circle */
+  width: 220px;  /* Set width */
+  height: 190px;  /* Equal height for a perfect circle */
   border-radius: 50%;  /* Makes the button circular */
   background-color: #758657;
   color: white;

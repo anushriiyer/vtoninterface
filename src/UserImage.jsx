@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { initAccordions, initFlowbite } from 'flowbite';
 import { useEffect } from 'react';
+import Navbar from './assets/Navbar';
 
 
 const UserImage = () => {
@@ -85,16 +86,7 @@ const UserImage = () => {
 
     return (
       <div className='site-container'>
-        {/* Navbar */}
-        <nav className="flex justify-between items-center w-full px-8 py-4 fixed top-0 left-0 bg-transparent z-50">
-          <div className="text-lg font-semibold logo">VIRTUAL-TRY<br></br> ON HUB.</div>
-          <ul className="flex space-x-8 justify-end items-end py-6">
-            <li><Link to="/" className="hover:text-600 font-semibold">HOME</Link></li>
-            <li><a href="#project" className="hover:text-600 font-semibold">PROJECT</a></li>
-            <li><a href="#tryon" className="hover:text-600 font-semibold">TRY ON</a></li>
-            <li><a href="#contact" className="hover:text-600 font-semibold">CONTACT</a></li>
-          </ul>
-        </nav>
+        <Navbar/>
 
         {/* Image Upload Section */}
         <div className="flex flex-col w-1/2 h-10/12 mt-32 items-center justify-center overflow-hidden">

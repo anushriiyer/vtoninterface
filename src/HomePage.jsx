@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link} from 'react-router-dom';
+import Navbar from "./assets/Navbar";
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -11,18 +12,8 @@ const HomePage = () => {
   
   return (
     <div className='site-container flex'>
-      {/* Navbar */}
-      <nav className="flex justify-between items-center w-full px-8 py-4 fixed top-0 left-0 bg-transparent z-50 bg-orange-500">
-        <div className="text-lg font-semibold logo">VIRTUAL-TRY<br></br> ON HUB.</div>
-        
-        <ul className="flex space-x-9 justify-center items-end py-6 ">
-          <li><a href="#home" className="hover:text-600 font-semibold">HOME</a></li>
-          <li><a href="#project" className="hover:text-600 font-semibold">PROJECT</a></li>
-          <li><Link to="/try-on" className="hover:text-600 font-semibold block">TRY ON</Link></li>
-          <li><a href="#contact" className="hover:text-600 font-semibold">CONTACT</a></li>
-        </ul>
-      </nav>
-
+      <Navbar/>
+     
       {/* Main Section */}
       <div className="text-container">
         {/* Text Section */}
