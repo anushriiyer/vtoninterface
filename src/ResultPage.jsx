@@ -199,7 +199,7 @@ const ResultPage = () => {
       <li><button onClick={() => setSelectedOption("Sign out")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</button></li>
     </ul>
 </div>
-<p className="text-3xl text-left block w-[100%] -mr-[440px] mt-20" >Prompt:</p>
+<p className="text-4xl text-left block w-[100%] -mr-[440px] mt-20" >Prompt:</p>
 <div className="h-1/6 w-3/5 rounded-xl bg-brand-beige mt-4 flex items-center justify-center px-8 cursor-text bg-cover bg-center">
 <input 
               type="text"

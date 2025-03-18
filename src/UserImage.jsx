@@ -117,9 +117,10 @@ const UserImage = () => {
         </div>
         {/*right container*/}
         <div className="h-[1000px] w-3/5 mr-0 mt-36 flex justify-center items-center flex-col">
-        <PrivacyBanner/>
+        <PrivacyBanner
+/>
           <div id="default-carousel" className="relative w-7/12 h-aut mt-20" data-carousel="static">
-          <p className='text-3xl'>Alternatively, click on one of these sample images to try-it-on!</p>
+          <p className='text-4xl'>Alternatively, click on one of these sample images to try-it-on!</p>
             
           {/* Image Wrapper */}
           <div className="relative overflow-hidden rounded-lg w-full h-[650px] flex items-center justify-center py-24">
