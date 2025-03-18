@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { initAccordions, initFlowbite } from 'flowbite';
 import { useEffect } from 'react';
 import Navbar from './assets/Navbar';
+import { PrivacyBanner } from './assets/Banner';
 
 
 const UserImage = () => {
@@ -90,9 +91,11 @@ const UserImage = () => {
 
         {/* Image Upload Section */}
         <div className="flex flex-col w-1/2 h-10/12 mt-32 items-center justify-center overflow-hidden">
-          <h1 className="text-9xl font-bold">USER IMAGE.</h1>
-          <div 
-            className="h-4/6 w-3/5 rounded-xl upload-box mt-4 flex items-center justify-center px-8 cursor-pointer bg-gray-100 bg-cover bg-center"
+          <h1 className="text-8xl font-bold">USER IMAGE.</h1>
+          <h3 className="w-3/5 text-xl  text-justify font-semibold font-Arial">Select a full-body image, preferably with minimal/plain background for a better quality output. High quality images will have better outputs.</h3>
+          
+          <div data-tooltip-target = "tooltip-box" data-tooltip-placement="right" data-tooltip-trigger="hover"
+            className="h-4/6 w-8/12 rounded-xl upload-box mt-4 flex items-center justify-center px-8 cursor-pointer bg-gray-100 bg-cover bg-center"
             style={{ backgroundImage: image ? `url(${image})` : 'none' }}
             onClick={() => document.getElementById('fileInput').click()}
           >
@@ -107,11 +110,15 @@ const UserImage = () => {
               onChange={handleImageUpload}
             />
           </div>
+          <div id="tooltip-box"  role="tooltip"  className="absolute z-10 invisible inline-block px-3 py-2 text-lg font-Arial max-w-56 text-white bg-gray-700 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+        Select a full body image from your files.
+       </div>
          
         </div>
         {/*right container*/}
         <div className="h-[1000px] w-3/5 mr-0 mt-36 flex justify-center items-center flex-col">
-          <div id="default-carousel" className="relative w-7/12 h-aut" data-carousel="static">
+        <PrivacyBanner/>
+          <div id="default-carousel" className="relative w-7/12 h-aut mt-20" data-carousel="static">
           <p className='text-3xl'>Alternatively, click on one of these sample images to try-it-on!</p>
             
           {/* Image Wrapper */}
@@ -159,7 +166,10 @@ const UserImage = () => {
       </div>
     
 
-    <button className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl" onClick={() => setImage(null)}>Remove</button>
+    <button className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl" data-tooltip-target = "tooltip-remove" data-tooltip-placement="right"  data-tooltip-trigger="hover" onClick={() => setImage(null)}>Remove</button>
+    <div id="tooltip-remove"  role="tooltip"  className="absolute z-10 invisible inline-block px-3 py-2 text-lg font-Arial max-w-56 text-white bg-gray-700 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+        Click Remove to remove the image from the left panel.
+       </div>
     </div>
         {image && (
             <button onClick={GoResultPage} className='mb-0'>

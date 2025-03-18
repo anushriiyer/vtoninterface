@@ -88,7 +88,7 @@ function saveFileToLocalStorage(key, file) {
         <h1 className="text-9xl font-bold">GARMENT IMAGE.</h1>
 
         {/* Upload Box */}
-        <div 
+        <div data-tooltip-target = "tooltip-box" data-tooltip-placement="bottom" data-tooltip-trigger="hover"
           className="h-4/6 w-3/5 rounded-xl upload-box mt-4 flex items-center justify-center px-8 cursor-pointer bg-gray-100 bg-cover bg-center"
           style={{ backgroundImage: image ? `url(${image})` : 'none' }}
           onClick={() => document.getElementById('fileInput').click()}
@@ -103,7 +103,11 @@ function saveFileToLocalStorage(key, file) {
             accept="image/*"
             onChange={handleImageUpload}
           />
+        
         </div>
+        <div id="tooltip-box"  role="tooltip"  className="absolute z-10 invisible inline-block px-3 py-2 text-lg font-Arial max-w-56 text-white bg-gray-700 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+        Select a garment image of choice from your files.
+       </div>
       </div>
 
       {/* URL Input for Image Extraction */}
@@ -127,9 +131,16 @@ function saveFileToLocalStorage(key, file) {
 
   
         <ImageExtractor url={url} setImage={setExtractedImage} />
-        <div className="flex gap-4 mt-6 self-center">
-        <button className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl" onClick={handleUrlUpload}>Upload</button>
-        <button className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl" onClick={() => setImage(null)}>Remove</button>
+        <div className="flex gap-6 mt-6 self-center">
+        <button data-tooltip-target = "tooltip-upload" data-tooltip-placement="bottom"  data-tooltip-trigger="hover" className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl" onClick={handleUrlUpload}>Upload</button>
+        <div id="tooltip-upload"  role="tooltip"  className="absolute z-10 invisible inline-block px-3 py-2 text-lg font-Arial max-w-56 text-white bg-gray-700 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+        Click Upload for the URL image to appear on the left-panel.
+       </div>
+
+        <button data-tooltip-target = "tooltip-remove" data-tooltip-placement="bottom"  data-tooltip-trigger="hover" className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl" onClick={() => setImage(null)}>Remove</button>
+        <div id="tooltip-remove"  role="tooltip"  className="absolute z-10 invisible inline-block px-3 py-2 text-lg font-Arial max-w-56 text-white bg-gray-700 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+        Click Remove to remove the image from the left panel.
+       </div>
       </div>
       </div>
 

@@ -1,9 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "flowbite/src/themes/default";
-@plugin "flowbite/plugin";
-@source "../node_modules/flowbite";
+@import "./node_modules/flowbite/src/themes/default";
+@plugin "./node_modules/flowbite/plugin";
+@source "./node_modules/flowbite";
 
 html{
   display: flex;
