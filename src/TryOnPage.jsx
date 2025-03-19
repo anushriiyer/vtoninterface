@@ -72,7 +72,7 @@ const TryOnPage = () => {
             await saveFileToLocalStorage("garmentImageFile", file);
             console.log("Extracted image saved to localStorage:", file);
         } else {
-            await saveFileToLocalStorage("userImageFile", file);
+            await saveFileToLocalStorage("garmentImageFile", file);
             console.log("User image saved to localStorage:", file);
         }
     } catch (error) {
@@ -155,9 +155,10 @@ function saveFileToLocalStorage(key, file) {
       {/* URL Input for Image Extraction */}
       <div className="flex w-1/2 h-3/4 items-center justify-center flex-col mt-40 mr-10">
         <div className="text-white p-4 rounded-lg">
-          <p className="text-4xl mb-8">
+          <p className="text-4xl mb-6">
             Like something specific? Add a link from your favourite shopping site here:
           </p>
+          <h3 className='text-xl font-Arial mb-3'>If 'Failed to fetch image' error shown. Kindly screenshot the image from the site and upload as file.</h3>
 
           <div className="flex items-center bg-brand-beige rounded-full px-4 py-5 w-full max-w-4xl">
             <input 
@@ -195,29 +196,29 @@ function saveFileToLocalStorage(key, file) {
           
           <div className="hidden absolute inset-0 flex items-center justify-center transition" data-carousel-item>
             <button onClick={() => handleUrlUpload("/black-dress-female.jpg")}>
-            <img src="./public/black-dress-female.jpg" className="carousell-slide" alt="..." />
+            <img src="./public/black-dress-female.jpg" className="carousell-slide w-full h-full object-contain" alt="..." />
             </button>
           </div>
 
           <div className="hidden absolute inset-0 flex items-center justify-center transition " data-carousel-item>
             <button onClick={() => handleUrlUpload("/green-shirt-male.jpg")}>
-            <img src="./public/green-shirt-male.jpg" className="carousell-slide" alt="..." />
+            <img src="./public/green-shirt-male.jpg" className="carousell-slide w-full h-full object-contain" alt="..." />
             </button>
           </div>
 
           <div className="hidden absolute inset-0 flex items-center justify-center transition " data-carousel-item>
             <button onClick={() => handleUrlUpload("/red-shirt-male.jpg")}>
-            <img src="./public/red-shirt-male.jpg" className="carousell-slide" alt="..." />
+            <img src="./public/red-shirt-male.jpg" className="carousell-slide w-full h-full object-contain" alt="..." />
             </button>
           </div>
           <div className="hidden absolute inset-0 flex items-center justify-center transition " data-carousel-item>
             <button onClick={() => handleUrlUpload("/red-sweater-female.jpg")}>
-            <img src="./public/red-sweater-female.jpg" className="carousell-slide" alt="..." />
+            <img src="./public/red-sweater-female.jpg" className="carousell-slide w-full h-full object-contain" alt="..." />
             </button>
           </div>
           <div className="hidden absolute inset-0 flex items-center justify-center transition " data-carousel-item>
             <button onClick={() => handleUrlUpload("/white-pant-male.jpg")}>
-            <img src="./public/white-pant-male.jpg" className="carousell-slide" alt="..." />
+            <img src="./public/white-pant-male.jpg" className="carousell-slide w-full h-full object-contain" alt="..." />
             </button>
           </div>
 

@@ -10,7 +10,7 @@ export function PrivacyBanner() {
       <h2 className="px-4 mb-1 text-xl font-semibold text-gray-900 dark:text-white text-left font-Arial">
       ⚠ Your Privacy Matters!
       </h2>
-      <p className="px-6 text-lg font-Arial font-normal text-white dark:text-white text-left leading-tight">
+      <p className="px-6 text-lg font-Arial font-normal text-white dark:text-white text-left leading-tight text-justify">
         In accordance with data protection and privacy policies, we do not store any uploaded images.
         All images are temporarily saved only for the duration of your try-on session and are automatically removed when you close this session.
       </p>
