@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Client } from "@gradio/client";
 import { Link } from 'react-router-dom';
 import {initFlowbite } from 'flowbite';
+import CircularProgress from './assets/CircularProgress.jsx';
+import Navbar from './assets/Navbar.jsx';
+import VerticalProgressBar from "./assets/VerticalProgressBar.jsx";
 
-//upload is file type, url also retrieves a file or does i
 
 // Function to get saved files from localStorage
 function getSavedFile(key) {
@@ -32,7 +34,7 @@ const ResultPage = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [userPrompt, setUserPrompt] = useState("A woman with t-shirt and jeans"); 
+  const [userPrompt, setUserPrompt] = useState("A beautiful woman"); 
   const [selectedOption, setSelectedOption] = useState("Try-on Models");
 
   useEffect(() => {
@@ -139,7 +141,7 @@ const ResultPage = () => {
             scale: 2.5,
             seed: 42,
            vt_model_type:"viton_hd",
-          vt_garment_type: "upper_body",
+           vt_garment_type: "dresses",
             vt_repaint: false,
         });
   
@@ -167,34 +169,32 @@ const ResultPage = () => {
 
   return (
     <div className="site-container">
-        <nav className="flex justify-between items-center w-full px-8 py-4 fixed top-0 left-0 bg-transparent z-50">
-        <div className="text-lg font-semibold logo">VIRTUAL-TRY<br></br> ON HUB.</div>
-        
-        <ul className="flex space-x-8 justify-end items-end py-6">
-          <li><Link to="/" className="hover:text-600 font-semibold">HOME</Link></li>
-          <li><a href="#project" className="hover:text-600 font-semibold">PROJECT</a></li>
-          <li><a href="#tryon" className="hover:text-600 font-semibold">TRY ON</a></li>
-          <li><a href="#contact" className="hover:text-600 font-semibold">CONTACT</a></li>
-        </ul>
-      </nav>
+<Navbar></Navbar>
+
+<div className="fixed left-8 top-1/3">
+  <VerticalProgressBar currentStep={3} totalSteps={3} />
+</div>
 
 
     <div className="text-container flex items-center justify-center flex-col space-y-7">
-      <h1 className="text-8xl">Result Image</h1>
-    <div className="h-5/6 w-3/5 rounded-xl upload-box mt-4 flex items-center justify-center px-8 bg-gray-100 bg-cover bg-center">
-    {loading ? <p className="text-xl">Processing...</p> : imageSrc ? <img src={imageSrc} alt="Try-On Result" className="rounded-xl object-contain w-full h-full" /> : <p className="text-brand-beige text-2xl">Waiting for model...</p>}
+      <h1 className="text-8xl ml-72">Result Image</h1>
+
+
+    <div className="h-5/6 w-3/5 rounded-xl upload-box mt-4 ml-72 flex px-8 bg-gray-100 bg-cover bg-center items-center justify-center ">
+    {loading ? <CircularProgress duration={10*1000*1.5}/>: imageSrc ? <img src={imageSrc} alt="Try-On Result" className="rounded-xl object-contain w-full h-full" /> : <p className="text-brand-beige text-3xl">Waiting for model...</p>}
     </div>
     </div>
+
         <div className="image-container flex-col">
-        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-brand-green hover:bg-brand-green-dark focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-2xl px-5 py-2.5 text-center inline-flex items-center dark:bg-brand-green dark:hover:bg-brand-green-dark dark:focus:ring-blue-800 -mt-56" type="button">{selectedOption} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="text-white bg-brand-green hover:bg-brand-green-dark focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-2xl px-5 py-2.5 text-center inline-flex items-center dark:bg-brand-green dark:hover:bg-brand-green-dark dark:focus:ring-blue-800 -mt-56" type="button">{selectedOption} <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
           </svg>
           </button>
 
-<div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-64 dark:bg-gray-700 ">
-    <ul class="py-2 text-2xl text-gray-700 dark:text-gray-200 bg-neutral-600 rounded-lg w-64" aria-labelledby="dropdownDefaultButton">
+<div id="dropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-64 dark:bg-gray-700 ">
+    <ul className="py-2 text-2xl text-gray-700 dark:text-gray-200 bg-neutral-600 rounded-lg w-64" aria-labelledby="dropdownDefaultButton">
       <li><button onClick={() => setSelectedOption("IMAGDressing")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">IMAGDressing</button></li>
-      <li><button onClick={() => setSelectedOption("Settings")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Leffa</button></li>
+      <li><button onClick={() => setSelectedOption("Leffa")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Leffa</button></li>
       <li><button onClick={() => setSelectedOption("Earnings")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</button></li>
       <li><button onClick={() => setSelectedOption("Sign out")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</button></li>
     </ul>
@@ -209,9 +209,27 @@ const ResultPage = () => {
               className="bg-transparent border-none outline-none text-gray-800 placeholder-gray-500 w-full text-xl text-center"></input>
               
     </div>
-    <button onClick={LeffaTryOn} className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl mt-24" disabled={loading}>
-      {loading ? "Processing..." : "Run Try-On"}
-    </button>
+    <div className="flex-row flex gap-20"> 
+    <button
+  onClick={() => {
+    if (selectedOption === "Leffa") {
+      LeffaTryOn();
+    } else if (selectedOption === "IMAGDressing") {
+      IMAGTryOn();
+    }
+  }}
+  className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl mt-24"
+  disabled={loading}
+>
+  {loading ? "Running" : "Run Try-On"}
+</button>
+<button className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl mt-24">
+  <a href={imageSrc} Download="tryon_output">
+Download
+</a>
+</button>
+</div>
+
     </div>
 
     

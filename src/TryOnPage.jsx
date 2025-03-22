@@ -5,6 +5,7 @@ import React from 'react';
 import ImageExtractor from "./assets/ImageExtracter.jsx";
 import Navbar from './assets/Navbar.jsx';
 import { initAccordions, initFlowbite } from 'flowbite'
+import VerticalProgressBar from './assets/VerticalProgressBar.jsx';
 
 const TryOnPage = () => {
   const [showExamples, setShowExamples] = useState(false);
@@ -125,13 +126,18 @@ function saveFileToLocalStorage(key, file) {
       {/* Navbar */}
       <Navbar/>
 
+      <div className="fixed left-8 top-1/3">
+  <VerticalProgressBar currentStep={1} totalSteps={3} />
+</div>
+
+
       {/* Garment Upload Section */}
       <div className="flex flex-col w-1/2 h-10/12 mt-32 items-center justify-center overflow-hidden">
-        <h1 className="text-8xl font-bold">GARMENT IMAGE.</h1>
-        <h3 className="w-3/5 text-xl  text-justify font-semibold font-Arial">Select a clothing image, preferably with minimal/plain background for a better quality output. High quality images will have better outputs.</h3>
+        <h1 className="text-8xl ml-56 font-bold">GARMENT IMAGE.</h1>
+        <h3 className="w-3/5 ml-56 text-xl  text-justify font-semibold font-Arial">Select a clothing image, preferably with minimal/plain background for a better quality output. High quality images will have better outputs.</h3>
         {/* Upload Box */}
         <div data-tooltip-target = "tooltip-box" data-tooltip-placement="bottom" data-tooltip-trigger="hover"
-          className="h-4/6 w-3/5 rounded-xl upload-box mt-4 flex items-center justify-center px-8 cursor-pointer bg-gray-100 bg-cover bg-center"
+          className="h-4/6 w-3/5 ml-56 rounded-xl upload-box mt-4 flex items-center justify-center px-8 cursor-pointer bg-gray-100 bg-cover bg-center"
           style={{ backgroundImage: image ? `url(${image})` : 'none' }}
           onClick={() => document.getElementById('fileInput').click()}
         >

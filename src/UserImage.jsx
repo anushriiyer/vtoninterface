@@ -5,6 +5,7 @@ import { initAccordions, initFlowbite } from 'flowbite';
 import { useEffect } from 'react';
 import Navbar from './assets/Navbar';
 import { PrivacyBanner } from './assets/Banner';
+import VerticalProgressBar from './assets/VerticalProgressBar';
 
 
 const UserImage = () => {
@@ -49,11 +50,11 @@ const UserImage = () => {
       }
   };
   
-  // Converts a File/Blob to Base64
+  
   async function fileToBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.readAsDataURL(file);  // Use readAsDataURL() to convert to Base64
+        reader.readAsDataURL(file); 
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
     });
@@ -89,13 +90,17 @@ const UserImage = () => {
       <div className='site-container'>
         <Navbar/>
 
+        <div className="fixed left-8 top-1/3">
+  <VerticalProgressBar currentStep={2} totalSteps={3} />
+</div>
+
         {/* Image Upload Section */}
         <div className="flex flex-col w-1/2 h-10/12 mt-32 items-center justify-center overflow-hidden">
-          <h1 className="text-8xl font-bold">USER IMAGE.</h1>
-          <h3 className="w-3/5 text-xl  text-justify font-semibold font-Arial">Select a full-body image, preferably with minimal/plain background for a better quality output. High quality images will have better outputs.</h3>
+          <h1 className="text-8xl font-bold ml-72">USER IMAGE.</h1>
+          <h3 className="w-3/5 text-xl  ml-72 text-justify font-semibold font-Arial">Select a full-body image, preferably with minimal/plain background for a better quality output. High quality images will have better outputs.</h3>
           
           <div data-tooltip-target = "tooltip-box" data-tooltip-placement="right" data-tooltip-trigger="hover"
-            className="h-4/6 w-8/12 rounded-xl upload-box mt-4 flex items-center justify-center px-8 cursor-pointer bg-gray-100 bg-cover bg-center"
+            className="h-4/6 w-8/12 ml-72 rounded-xl upload-box mt-4 flex items-center justify-center px-8 cursor-pointer bg-gray-100 bg-cover bg-center"
             style={{ backgroundImage: image ? `url(${image})` : 'none' }}
             onClick={() => document.getElementById('fileInput').click()}
           >
