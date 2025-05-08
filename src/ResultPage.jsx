@@ -106,6 +106,7 @@ const ResultPage = () => {
       }
     };
 
+    // Function to run APICall to Leffa
     const LeffaTryOn = async () => {
       const faceImage = getSavedFile("userImageFile"); 
       const garmentImage = getSavedFile("garmentImageFile"); 
@@ -155,6 +156,7 @@ const ResultPage = () => {
               return;
             } else {
               console.warn("⚠️ No valid result. API response:", result);
+
             }
           } catch (error) {
             console.error("❌ API Request Error:", error);
@@ -165,6 +167,135 @@ const ResultPage = () => {
           await new Promise((res) => setTimeout(res, 5000));
         }
       };
+
+  // Function to run APICall to CatVTON
+const CatVTONTryOn = async () => {
+  const faceImage = getSavedFile("userImageFile");
+  const garmentImage = getSavedFile("garmentImageFile");
+
+  if (!faceImage || !garmentImage) {
+    console.error("Face image or garment image is missing. Aborting API call.");
+    setError("Missing required images.");
+    return;
+  }
+
+  let app;
+  try {
+    app = await Client.connect("zhengchong/CatVTON");
+    console.log("API Connected:", app);
+  } catch (error) {
+    console.error("Failed to connect to API:", error);
+    setError("API connection failed.");
+    return;
+  }
+
+  setLoading(true);
+  for (let attempt = 1; attempt <= 10; attempt++) {
+    try {
+      console.log(`Attempt ${attempt} to fetch try-on result...`);
+
+      const result = await app.predict("/submit_function", {
+        person_image: {"background": faceImage},
+        cloth_image: garmentImage,
+        cloth_type: "upper", // Adjust as needed
+        num_inference_steps: 50,
+        guidance_scale: 2.5,
+        seed: 42,
+        show_type: "input & mask & result",
+      });
+
+      console.log("📩 Full API Response:", result);
+
+      if (result && result.data) {
+        console.log("API Data:", result.data);
+        console.log("✅ Valid result received!");
+        setImageSrc(result.data[0].url);
+        setLoading(false);
+        return;
+      } else {
+        console.warn("⚠️ No valid result. API response:", result);
+      }
+    } catch (error) {
+      console.error("❌ API Request Error:", error);
+      if (error.response) {
+        console.error("Response Status:", error.response.status);
+        console.error("Response Data:", error.response.data);
+        console.error("Response Headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("No response received. Request details:", error.request);
+      } else {
+        console.error("Error Message:", error.message);
+      }
+      if (attempt === 10) {
+        setLoading(false);
+      }
+    }
+    await new Promise((res) => setTimeout(res, 5000));
+  }
+};
+
+ // Function to run APICall to OOTDiffusion
+const OOTDiffusionTryOn = async () => {
+  const faceImage = getSavedFile("userImageFile");
+  const garmentImage = getSavedFile("garmentImageFile");
+  const poseImage = getSavedFile("poseImageFile");
+  if (!faceImage || !garmentImage) {
+    console.error("Face image or garment image is missing. Aborting API call.");
+    setError("Missing required images.");
+    return;
+  }
+  let app;
+  try {
+    app = await Client.connect("levihsu/OOTDiffusion");
+    console.log("API Connected:", app);
+  } catch (error) {
+    console.error("Failed to connect to API:", error);
+    setError("API connection failed.");
+    return;
+  }
+  setLoading(true);   
+  for (let attempt = 1; attempt <= 10; attempt++) {
+    try {
+      console.log(`Attempt ${attempt} to fetch try-on result...`);
+
+      const result = await app.predict("/process_hd", {
+        vton_img:faceImage,
+        garm_img: garmentImage,
+        n_samples:1,
+        n_steps:20,
+        image_scale:2,
+        seed:-1,
+      });
+
+      console.log("📩 Full API Response:", result);
+
+      if (result && result.data) {
+        console.log("API Data:", result.data);
+        console.log("✅ Valid result received!");
+        setImageSrc(result.data[0].url);
+        setLoading(false);
+        return;
+      } else {
+        console.warn("⚠️ No valid result. API response:", result);
+      }
+    } catch (error) {
+      console.error("❌ API Request Error:", error);
+      if (error.response) {
+        console.error("Response Status:", error.response.status);
+        console.error("Response Data:", error.response.data);
+        console.error("Response Headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("No response received. Request details:", error.request);
+      } else {
+        console.error("Error Message:", error.message);
+      }
+      if (attempt === 10) {
+        setLoading(false);
+      }
+    }
+    await new Promise((res) => setTimeout(res, 5000));
+  }
+};
 
 
   return (
@@ -195,8 +326,8 @@ const ResultPage = () => {
     <ul className="py-2 text-2xl text-gray-700 dark:text-gray-200 bg-neutral-600 rounded-lg w-64" aria-labelledby="dropdownDefaultButton">
       <li><button onClick={() => setSelectedOption("IMAGDressing")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">IMAGDressing</button></li>
       <li><button onClick={() => setSelectedOption("Leffa")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Leffa</button></li>
-      <li><button onClick={() => setSelectedOption("Earnings")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</button></li>
-      <li><button onClick={() => setSelectedOption("Sign out")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</button></li>
+      <li><button onClick={() => setSelectedOption("CatVTON")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">CatVTON</button></li>
+      <li><button onClick={() => setSelectedOption("OOTDiffusion")} className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">OOTDiffusion</button></li>
     </ul>
 </div>
 <p className="text-4xl text-left block w-[100%] -mr-[440px] mt-20" >Prompt:</p>
@@ -216,6 +347,15 @@ const ResultPage = () => {
       LeffaTryOn();
     } else if (selectedOption === "IMAGDressing") {
       IMAGTryOn();
+    }
+    else if (selectedOption === "CatVTON") {
+      CatVTONTryOn();
+    } 
+    else if (selectedOption === "OOTDiffusion") {
+      OOTDiffusionTryOn();
+    } 
+    else {
+      console.error("Invalid option selected.");
     }
   }}
   className="bg-brand-green px-4 py-2 rounded-lg w-44 h-16 text-xl mt-24"

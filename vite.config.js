@@ -13,4 +13,14 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    chunkSizeWarningLimit: 1000, // increase if needed
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'flowbite'], // example
+        },
+      },
+    },
+  },
 });
